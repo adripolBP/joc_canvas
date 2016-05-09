@@ -3,7 +3,7 @@ $(document).on('deviceready', function() {
      var canvas = document.getElementById('canvas');
      
      // determinem amplada alçada DISPOSITIU ------------------
-     var amplada_pantalla = screen.width ;
+     var amplada_pantalla = screen.width ;           
      var alcada_pantalla = screen.height ; 
      var amplada_pantalla_CSS = window.innerWidth ; 
      var alcada_pantalla_CSS = window.innerHeight ;

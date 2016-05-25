@@ -130,7 +130,7 @@ $(document).on('deviceready', function() {
         startx = parseInt(touchobj.clientX) ; // get x position of touch point relative to left edge of browser
         starty = parseInt(touchobj.clientY) ; // la pos Y
         //statusdiv.innerHTML = 'Status: touchstart<br> ClientX: ' + startx + 'px' ;
-        alert("Has tocat el punt -coordenades- ( " + startx + "px , " + starty + "px )");
+        //alert("Has tocat el punt -coordenades- ( " + startx + "px , " + starty + "px )");
         e.preventDefault() ;
       
       }

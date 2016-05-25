@@ -19,9 +19,12 @@ $(document).on('deviceready', function() {
         if (canvas.width  < window.innerWidth)  { canvas.width  = window.innerWidth;  }
         if (canvas.height < window.innerHeight) { canvas.height = window.innerHeight; }
      */
+    
      
-     //var info_pantalla = "amplada_pantalla : " + amplada_pantalla + " --- alçada_pantalla : " + alcada_pantalla +  " --- amplada_pantalla_CSS : " + amplada_pantalla_CSS + " --- alçada_pantalla_CSS : " + alcada_pantalla_CSS ;
-     //alert(info_pantalla);
+    	var info_pantalla = "amplada_pantalla : " + amplada_pantalla + " --- alçada_pantalla : " + alcada_pantalla +  " --- amplada_pantalla_CSS : " + amplada_pantalla_CSS + " --- alçada_pantalla_CSS : " + alcada_pantalla_CSS ;
+    	alert(info_pantalla);
+     
+     
      
      draw();
  
@@ -52,7 +55,7 @@ $(document).on('deviceready', function() {
 		var amplada_rect = amplada_pantalla_CSS  - 20 ;
 		var alcada_rect = alcada_pantalla_CSS - 20 ;
 		
-		alert( "Dibuixaré un rectangle amb origen a (10,10) i d´amplada : " + amplada_rect + " i alçada : " + alcada_rect);
+		// alert( "Dibuixaré un rectangle amb origen a (10,10) i d´amplada : " + amplada_rect + " i alçada : " + alcada_rect);
 		roundedRect(ctx,10,10,amplada_rect,alcada_rect,10);
 		
 		// Situem la imatge ( bola )
@@ -62,8 +65,8 @@ $(document).on('deviceready', function() {
 		var centre_y = alcada_pantalla_CSS / 2 ;
 		
 		// quina mida la bola ?
-		var mida_x_bola = 30 ;
-		var mida_y_bola = 30 ;
+		var mida_x_bola = amplada_pantalla_CSS * ( 10 / 100 ) ; // 36 ;  10% de l'amplada de la pantalla -> amplada_pantalla_CSS 
+		var mida_y_bola = mida_x_bola ;  // 36 ;
 		
 		// Quina posició la bola ? Temin present que la bola ocupa un espai 
 		var posicio_x_bola = centre_x - ( mida_x_bola / 2 ) ;
@@ -119,6 +122,55 @@ $(document).on('deviceready', function() {
 		//somthing
 		alert("has girat el dispositiu");
 	});
+      
+      // AQUESTA PART DETECTA EL TOUCH DE L'USUARI
+      document.addEventListener('touchstart', function(e) {
+      
+      	var touchobj = e.changedTouches[0] ; // reference first touch point (ie: first finger)
+        startx = parseInt(touchobj.clientX) ; // get x position of touch point relative to left edge of browser
+        starty = parseInt(touchobj.clientY) ; // la pos Y
+        //statusdiv.innerHTML = 'Status: touchstart<br> ClientX: ' + startx + 'px' ;
+        alert("Has tocat el punt -coordenades- ( " + startx + "px , " + starty + "px )");
+        e.preventDefault() ;
+      
+      }
+      , false);
+
+
+      // touchmove
+      document.addEventListener('touchmove', onDocumentTouchMove, false);
+
+	
+	function onDocumentTouchMove(event)
+	{
+	    for(var i = 0; i < event.touches.length; i++)
+	    {
+	        clickX[i] = event.touches[i].pageX;
+	        clickY[i] = event.touches[i].pageY;
+	    }
+	}
+      
+});
+
+/*
+ var pointerEventToXY = function(e){
+      var out = {x:0, y:0};
+      if(e.type == 'touchstart' || e.type == 'touchmove' || e.type == 'touchend' || e.type == 'touchcancel'){
+        var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+        out.x = touch.pageX;
+        out.y = touch.pageY;
+      } else if (e.type == 'mousedown' || e.type == 'mouseup' || e.type == 'mousemove' || e.type == 'mouseover'|| e.type=='mouseout' || e.type=='mouseenter' || e.type=='mouseleave') {
+        out.x = e.pageX;
+        out.y = e.pageY;
+      }
+      return out;
+    };
+    
+    $('a').on('mousedown touchstart', function(e){
+       //console.log(pointerEventToXY(e)); // will return obj ..kind of {x:20,y:40}
+       alert(pointerEventToXY(e));
+    }) 
+*/
       
       
       
